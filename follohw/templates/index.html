@@ -1,0 +1,20 @@
+$def with (greeting)
+
+
+$if greeting:
+    <div class="well well-lg">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h3 class="panel-title">Greetings and Salutations!</h3></div>
+        <div class="panel-body">I just wanted to say <span style="color: green; font-size: 2em;">$greeting</span>.</div>
+    </div>
+    </div>
+$else:
+    <div class="well well-sm">
+    <div class="panel panel-danger">
+        <div class="panel-heading"><h3 class="panel-title">You forgot something!</h3></div>
+        <div class="panel-body"><em>Hello</em>, world!</div>
+    </div>
+    </div>
+
+
+<button class="btn btn-lg btn-warning"><a href="/hello">Try Again</a></button>
