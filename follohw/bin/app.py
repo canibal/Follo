@@ -1,5 +1,5 @@
 import web
-from follohw import *
+from follohw.user import User
 
 urls = (
   '/', 'Index'
