@@ -11,7 +11,10 @@ render = web.template.render('templates/', base="layout")
 
 class Index(object):
     def GET(self):
-        return render.login()
+        form = web.input(code=None)
+        access_token = "%s" % form.code
+
+        return render.login(access_token = access_token)
 
     def POST(self):
         form = web.input(username="", password="")
