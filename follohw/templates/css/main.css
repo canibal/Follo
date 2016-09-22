@@ -1,0 +1,8 @@
+.header-user: {
+    font-weight:bold;
+    color:#fff;
+    text-shadow:0 1px 0 rgba(3, 27, 47, 0.5);
+    font-size:1.4rem;
+    font-family:'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    line-height:20px;
+}
