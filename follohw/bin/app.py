@@ -1,7 +1,8 @@
 import web
+from follohw import *
 
 urls = (
-  '/hello', 'Index'
+  '/', 'Index'
 )
 
 app = web.application(urls, globals())
@@ -13,9 +14,11 @@ class Index(object):
         return render.login()
 
     def POST(self):
-        form = web.input(name="Nobody", greet="Hello")
+        form = web.input(username="", password="")
         username = "%s" % (form.username)
-        return render.index(username = username)
+        password = "%s" % (form.password)
+        user_login(username, password)
+        return render.index(username = username, access_token = access_token, user_id = user_id, fullname = full_name)
 
 if __name__ == "__main__":
     app.run()
