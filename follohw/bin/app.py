@@ -10,12 +10,12 @@ render = web.template.render('templates/', base="layout")
 
 class Index(object):
     def GET(self):
-        return render.hello_form()
+        return render.login()
 
     def POST(self):
         form = web.input(name="Nobody", greet="Hello")
-        greeting = "%s, %s" % (form.greet, form.name)
-        return render.index(greeting = greeting)
+        username = "%s" % (form.username)
+        return render.index(username = username)
 
 if __name__ == "__main__":
     app.run()
