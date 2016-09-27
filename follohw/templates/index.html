@@ -1,14 +1,14 @@
-$def with (username)
+$def with (access_token)
 
 
-$if username:
+$if access_token:
     <div class="well well-lg">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Welcome to Follo, <strong class="header-user">$username</strong>!
+            <h3 class="panel-title">Welcome to Follo, <strong class="header-user">username</strong>!
             </h3>
         </div>
-        <div class="panel-body">Hello, <span class="">fullname</span>.</div>
+        <div class="panel-body">Hello, <span class="">$access_token</span>.</div>
     </div>
     </div>
 $else:
