@@ -16,14 +16,6 @@ render = web.template.render('templates/', base="layout")
 
 class Index(object):
     def GET(self):
-<<<<<<< Updated upstream
-        form = web.input(access_token=None)
-        access_token = "%s" % form.access_token
-
-        if access_token:
-            return render.index(access_token = access_token)
-        else:
-=======
 
         try:
             code = web.input()
@@ -31,10 +23,12 @@ class Index(object):
             u_name = auth_curl(code)a
             access_token = u_name['access_token']
             username = u_name['user']['username']
-            fullname = u_name['user'] 
-            return render.index(username = u_name['user']['username'])
+            fullname = u_name['user']['full_name']
+            user_id = u_name['user']['id'] 
+            picture_url = u_name['user']['profile_picture']
+            website = u_name['user']['website']
+            return render.index(username = username, fullname = fullname, user_id = user_id, picture_url = picture_url, website = website, access_token = access_token)
         except AttributeError: 
->>>>>>> Stashed changes
             return render.login()
 
     def POST(self):
