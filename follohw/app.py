@@ -20,7 +20,7 @@ class Index(object):
         try:
             code = web.input()
             code = code.code
-            u_name = auth_curl(code)a
+            u_name = auth_curl(code)
             access_token = u_name['access_token']
             username = u_name['user']['username']
             fullname = u_name['user']['full_name']
