@@ -44,7 +44,7 @@ def auth_curl(code):
     oauth_post = {'client_id': '2eed6a9a7b5c4a79bc0cbbc02fe91c22',
                   'client_secret': 'dcfffaaf3ca84ce0bf1508b881c2e634',
                   'grant_type': 'authorization_code',
-                  'redirect_uri': 'http://192.168.1.112:8080/login',
+                  'redirect_uri': 'http://74.88.195.211:8085/login',
                   'code': code
                          }
     authposts = urlencode(oauth_post)
