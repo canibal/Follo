@@ -8,7 +8,11 @@ $if access_token:
             <h3 class="panel-title">Welcome to Follo, <strong class="header-user">$username</strong>!
             </h3>
         </div>
-        <div class="panel-body">Hello, <span class="">$fullname</span>.</div>
+        <div class="panel-body">Hello, <span class="">$fullname</span>.<br/><a href=$website>$website</a>
+            <div class='self'>
+                <img src=$picture_url width='50' />
+            </div>
+        </div>
     </div>
     </div>
 $else:
