@@ -1,23 +1,27 @@
-$def with (username)
+$def with (username, fullname, user_id, picture_url, website, access_token)
 
 
-$if username:
+$if access_token:
     <div class="well well-lg">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Welcome to Follo, <strong class="header-user">$username</strong>!
             </h3>
         </div>
-        <div class="panel-body">Hello, <span class="">fullname</span>.</div>
+        <div class="panel-body">Hello, <span class="">$fullname</span>.<br/><a href=$website>$website</a>
+            <div class='self'>
+                <img src=$picture_url width='50' />
+            </div>
+        </div>
     </div>
     </div>
 $else:
     <div class="well well-sm">
     <div class="panel panel-danger">
         <div class="panel-heading"><h3 class="panel-title">You forgot something!</h3></div>
-        <div class="panel-body"><em>Hello</em>, world!</div>
+        <div class="panel-body"><em>Hello, Nobody!</em></div>
     </div>
     </div>
 
 
-<button class="btn btn-lg btn-warning"><a href="/hello">Try Again</a></button>
+<button class="btn btn-lg btn-warning"><a href="/login">Try Again</a></button>
