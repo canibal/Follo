@@ -1,5 +1,5 @@
 import web
-from models.user import User
+#from models.user import User
 import pycurl
 from urllib import urlencode, urlopen
 from StringIO import StringIO
@@ -7,7 +7,7 @@ import json
 import pprint
 
 urls = (
-  '/login', 'Index' 
+    '/login', 'Index'
 )
 
 app = web.application(urls, globals())
@@ -24,11 +24,11 @@ class Index(object):
             access_token = u_name['access_token']
             username = u_name['user']['username']
             fullname = u_name['user']['full_name']
-            user_id = u_name['user']['id'] 
+            user_id = u_name['user']['id']
             picture_url = u_name['user']['profile_picture']
             website = u_name['user']['website']
             return render.index(username = username, fullname = fullname, user_id = user_id, picture_url = picture_url, website = website, access_token = access_token)
-        except AttributeError: 
+        except AttributeError:
             return render.login()
 
     def POST(self):
@@ -50,7 +50,7 @@ def auth_curl(code):
     authposts = urlencode(oauth_post)
     c.setopt(c.POSTFIELDS, authposts)
     c.setopt(c.WRITEFUNCTION, data.write)
-    
+
     c.perform()
     c.close()
     response = json.loads(data.getvalue())
