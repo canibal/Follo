@@ -1,5 +1,5 @@
 import web
-#from models.user import User
+import models.user as user
 import pycurl
 from urllib import urlencode, urlopen
 from StringIO import StringIO
@@ -22,12 +22,24 @@ class Index(object):
             code = code.code
             u_name = auth_curl(code)
             access_token = u_name['access_token']
-            username = u_name['user']['username']
-            fullname = u_name['user']['full_name']
-            user_id = u_name['user']['id']
+            username = u_name['user']['username']  #consolidate to for loop
+            fullname = u_name['user']['full_name'] #for k,v pairs in user
+            user_id = u_name['user']['id']         #and adjust variables
             picture_url = u_name['user']['profile_picture']
             website = u_name['user']['website']
-            return render.index(username = username, fullname = fullname, user_id = user_id, picture_url = picture_url, website = website, access_token = access_token)
+            u = user.User()
+            user_id = u.set_user_id(username)
+            recent_json = u.get_recent(user_id, access_token)
+            print recent_json
+            print 'wah'
+            return render.index(username = username,
+                                fullname = fullname,
+                                user_id = user_id,
+                                picture_url = picture_url,
+                                website = website,
+                                access_token = access_token,
+                                recent_json = recent_json
+                               )
         except AttributeError:
             return render.login()
 

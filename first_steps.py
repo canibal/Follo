@@ -72,6 +72,12 @@ print silf
 #    print silf[i]['id']
 #    i += 1
 followers_raw = {}
+rilf = get_simple(self_recent_endpt)['data']
+recent = {}
+for i in range(len(rilf)):
+    rilfa = rilf[i]['id']
+    rilfb = {"thumbnail_url": rilf[i]['images']['thumbnail']['url']}
+    recent["%s" % rilfa] = rilfb
 for i in range(len(silf)):
     silfa = silf[i]['id']
     silfb = {"name": silf[i]['full_name']}
@@ -79,4 +85,4 @@ for i in range(len(silf)):
     silfb["pic"] = silf[i]['profile_picture']
     followers_raw["%s" % silfa] = silfb
 print followers_raw
-print get_simple(self_recent_endpt)['data']
+print recent

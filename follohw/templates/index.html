@@ -1,4 +1,4 @@
-$def with (username, fullname, user_id, picture_url, website, access_token)
+$def with (username, fullname, user_id, picture_url, website, access_token, recent_json)
 
 
 $if access_token:
@@ -12,8 +12,9 @@ $if access_token:
             <a href=$website>$website</a>
             <div class='self'>
                 <img src=$picture_url width='50' />
-                <div class=''>
-	<!-- 
+                <div class='recent .pull-right'>$recent_json
+                
+    <!-- 
 	$# Templetor or python function that puts first three 
 	$# and 2nd thumbnails of last 6 posts into list items
 	$# (<li>'s) with for loop, then use css to put first three
