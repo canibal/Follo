@@ -30,8 +30,6 @@ class Index(object):
             u = user.User()
             user_id = u.set_user_id(username)
             recent_json = u.get_recent(user_id, access_token)
-            print recent_json
-            print 'wah'
             return render.index(username = username,
                                 fullname = fullname,
                                 user_id = user_id,

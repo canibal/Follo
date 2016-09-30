@@ -40,8 +40,6 @@ class User(object):
         response = json.loads(data.getvalue())
         parsed = {}
         parsed = get_thumbnails(response['data'])
-        print parsed
-        print 'wah'
         return parsed
 
 def get_thumbnails(r):
@@ -50,6 +48,4 @@ def get_thumbnails(r):
         rk = r[i]['id']
         rv = {"thumbnail_url": r[i]['images']['thumbnail']['url']}
         d["%s" % rk] = rv
-        print d
-        print 'yay'
     return d

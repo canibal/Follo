@@ -12,8 +12,15 @@ $if access_token:
             <a href=$website>$website</a>
             <div class='self'>
                 <img src=$picture_url width='50' />
-                <div class='recent .pull-right'>$recent_json
-                
+    <div class='recent pull-right'>$recent_json
+    $#def ul(data):
+        <ul>
+    $#    $for k,v in iteritems(data):
+            <li>$v</li>
+        </ul>
+
+    $# data = $:recent_json
+    $#:ul(data)
     <!-- 
 	$# Templetor or python function that puts first three 
 	$# and 2nd thumbnails of last 6 posts into list items
