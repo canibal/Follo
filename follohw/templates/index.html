@@ -1,6 +1,7 @@
 $def with (username, fullname, user_id, picture_url, website, access_token, recent_json)
 
 
+
 $if access_token:
     <div class="well well-lg">
     <div class="panel panel-primary">
@@ -12,37 +13,35 @@ $if access_token:
             <a href=$website>$website</a>
             <div class='self'>
                 <img src=$picture_url width='50' />
-    <div class='recent pull-right'>$recent_json
-    $#def ul(data):
-        <ul>
-    $#    $for k,v in iteritems(data):
-    $#        <li>$v</li>
+    <div class='recent pull-right'> 
+        <ul class="recent">
+        $for i in recent_json:
+            <li class="recent recent-$loop.parity">
+		<img width=50 src=$i['thumbnail_url'] />
+	    </li>
         </ul>
+    </div>
+  <!-- 
+  Templetor or python function that puts first three 
+  and 2nd thumbnails of last 6 posts into list items
+  li's with for loop, then use css to put first three
+  thumbnails above and second three on bottom with like count
+  in bootstrap badges next to each. Eventually add in 
+  functionality 'like' button, video play control, pop-up 
+  expand w/ stats and comments, 
+  -->
 
-    $# data = $:recent_json
-    $#:ul(data)
-    <!-- 
-	$# Templetor or python function that puts first three 
-	$# and 2nd thumbnails of last 6 posts into list items
-	$# (<li>'s) with for loop, then use css to put first three
-	$# thumbnails above and second three on bottom with like count
-	$# in bootstrap badges next to each. Eventually add in 
-	$# functionality: 'like' button, video play control, pop-up 
-	$# expand w/ stats and comments, 
-	-->
-
-                </div>
             </div>
         </div>
     </div>
     </div>
-$else:
-    <div class="well well-sm">
-    <div class="panel panel-danger">
-        <div class="panel-heading"><h3 class="panel-title">You forgot something!</h3></div>
-        <div class="panel-body"><em>Hello, Nobody!</em></div>
-    </div>
-    </div>
+$#else:
+$#    <div class="well well-sm">
+$#    <div class="panel panel-danger">
+$#        <div class="panel-heading"><h3 class="panel-title">You forgot something!</h3></div>
+$#        <div class="panel-body"><em>Hello, Nobody!</em></div>
+$#    </div>
+$#    </div>
 
 
 <a href="/login"><button class="btn btn-lg btn-warning">Try Again</button></a>

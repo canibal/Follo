@@ -1,8 +1,36 @@
 .header-user: {
-    font-weight:bold;
-    color:#fff;
-    text-shadow:0 1px 0 rgba(3, 27, 47, 0.5);
-    font-size:1.4rem;
-    font-family:'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    line-height:20px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(3, 27, 47, 0.5);
+  font-size: 1.4rem;
+  font-family: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  line-height: 20px;
+}
+
+ul.recent {
+  list-style: none;
+  font-size: 0px;
+  position:relative;
+  top: 0px;
+}
+
+li.recent {
+  padding: .5em;
+  display: inline-block;
+  font-size: 16px;
+  font-size: 1rem;
+  vertical-align: top;
+  float:right;
+}
+
+li.recent-even {
+  top: 60px;
+  float:right;
+  position: relative;
+}
+
+li.recent-odd {
+  left: 0px;
+ 
+  position: relative;
 }

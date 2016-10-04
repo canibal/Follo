@@ -30,22 +30,24 @@ class User(object):
         # out what defaults are
         # (indent correctly) > if token = self.access_token
         c = pycurl.Curl()
-        data = StringIO()
+        datum = StringIO()
         #c.setopt(c.VERBOSE, True)
         c.setopt(c.URL,
         'https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s' % (user_id, token))
-        c.setopt(c.WRITEFUNCTION, data.write)
+        c.setopt(c.WRITEFUNCTION, datum.write)
         c.perform()
         c.close()
-        response = json.loads(data.getvalue())
+        response = json.loads(datum.getvalue())
         parsed = {}
         parsed = get_thumbnails(response['data'])
         return parsed
 
-def get_thumbnails(r):
-    d={}
+def get_thumbnails(r): 
+    dlist = []
     for i in range(len(r)):
-        rk = r[i]['id']
-        rv = {"thumbnail_url": r[i]['images']['thumbnail']['url']}
-        d["%s" % rk] = rv
-    return d
+        d = {"media_id": r[i]['id'],
+             "thumbnail_url": r[i]['images']['thumbnail']['url'],
+             "created": r[i]['created_time']
+            }
+        dlist.append(d)
+    return dlist
