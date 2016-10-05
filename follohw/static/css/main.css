@@ -1,17 +1,22 @@
 .header-user: {
   font-weight: bold;
   color: #fff;
-  text-shadow: 0 1px 0 rgba(3, 27, 47, 0.5);
+  text-shadow: 0 20px 0 rgba(3, 27, 47, 0.5);
   font-size: 1.4rem;
   font-family: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   line-height: 20px;
+}
+
+div.recent {
+  clear:none;
+
 }
 
 ul.recent {
   list-style: none;
   font-size: 0px;
   position:relative;
-  top: 0px;
+  
 }
 
 li.recent {
@@ -24,13 +29,14 @@ li.recent {
 }
 
 li.recent-even {
-  top: 60px;
-  float:right;
-  position: relative;
+  
 }
 
-li.recent-odd {
-  left: 0px;
+li.recent-odd { 
  
-  position: relative;
+}
+
+.location {
+  max-width: 50%;
+
 }

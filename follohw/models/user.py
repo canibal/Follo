@@ -42,12 +42,21 @@ class User(object):
         parsed = get_thumbnails(response['data'])
         return parsed
 
-def get_thumbnails(r): 
+def get_thumbnails(r):
     dlist = []
+    print r
     for i in range(len(r)):
         d = {"media_id": r[i]['id'],
              "thumbnail_url": r[i]['images']['thumbnail']['url'],
-             "created": r[i]['created_time']
+             "created": r[i]['created_time'],
+             "shortcode": r[i]['link'],
+             "location": r[i]['location'],
+             "caption": r[i]['caption']['text'],
+             "likes": r[i]['likes']['count'],
+             "user_has_liked": r[i]['user_has_liked'],
+             "comments": r[i]['comments']['count'],
+             "tags": r[i]['tags'],
+             "user": r[i]['user']
             }
         dlist.append(d)
     return dlist

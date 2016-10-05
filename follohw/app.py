@@ -5,6 +5,7 @@ from urllib import urlencode, urlopen
 from StringIO import StringIO
 import json
 import pprint
+import requests
 
 urls = (
     '/login', 'Index'
@@ -12,7 +13,8 @@ urls = (
 
 app = web.application(urls, globals())
 
-render = web.template.render('templates/', base="layout")
+render = web.template.render('templates/', base="layout", globals={'requests':
+requests})
 
 class Index(object):
     def GET(self):
@@ -45,7 +47,14 @@ class Index(object):
         form = web.input(username="")
         username = "%s" % (form.username)
         #user_login(username)
-        return render.index(username = username)
+        return render.index(username = username,
+                            fullname = fullname,
+                            user_id = user_id,
+                            picture_url = picture_url,
+                            website = website,
+                            access_token = access_token,
+                            recent_json = recent_json
+                           )
 
 def auth_curl(code):
     c = pycurl.Curl()
