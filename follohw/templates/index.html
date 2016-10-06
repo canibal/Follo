@@ -11,17 +11,16 @@ $if access_token:
         </div>
 
         <div class="panel-body row">
-	  <div class='col-xs-4 self text-center'>
-	  Hello, <span class="">$fullname</span>.<br/>
+	  <div class='col-xs-4 self text-center'>Hello, <span class="greeting">$fullname</span>.<br/>
             <a href=$website>$website</a><br/>
-              <a href=https://www.instagram.com/$username target=blank><img src=$picture_url /></a>
+              <a href=https://www.instagram.com/$username target=blank><img class="img-circle" src=$picture_url /></a>
 	  </div>
-          <div='recent col-xs-6'> 
+          <div="recent col-xs-8"> 
             <ul class="recent row">
                 $for i in recent_json[:6]:
-                  <li class="col-xs-2 thumbnail text-center recent recent-$loop.parity">
+                  <li class="col-xs-3 thumbnail text-center recent">
 		    <a target=blank href=$i['shortcode']>
-		      <img title='$i['caption']' src=$i['thumbnail_url'] />
+		      <img class="img-thumbnail" title='$i['caption']' src=$i['thumbnail_url'] />
  		    </a>
 		      <p class="text-center caption"> 
 		          $if i['user_has_liked']:
@@ -29,7 +28,12 @@ $if access_token:
 		          $else:
 		            <span class="badge"><span class="glyphicon glyphicon-heart-empty"></span> $i['likes']</span>
 		        <span class="badge"><span class="glyphicon glyphicon-comment"></span> $i['comments']</span><br/>
-		        <span class="badge"><span class="glyphicon glyphicon-map-marker"></span> $i['location']['name']</span>
+			  $if i['location'] == None:
+		              <small class="bg-warning text-muted"><span class="glyphicon glyphicon-map-marker"></span> Unknown</small>
+			  $elif i['location']['name'] != None:
+		              <small class="bg-info text-success"><span class="glyphicon glyphicon-map-marker"></span> $i['location']['name']</small>
+			  $else:
+		              <small class="bg-info text-info"><span class="glyphicon glyphicon-map-marker"></span> $i['location']['longitude'], $i['location']['latitude']</small>
 		      </p>
 	          </li>
             </ul>
