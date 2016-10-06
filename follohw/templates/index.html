@@ -11,35 +11,45 @@ $if access_token:
         </div>
 
         <div class="panel-body row">
-	  <div class='col-xs-4 self text-center'>Hello, <span class="greeting">$fullname</span>.<br/>
-            <a href=$website>$website</a><br/>
-              <a href=https://www.instagram.com/$username target=blank><img class="img-circle" src=$picture_url /></a>
+	  <div class="col-xs-6 self center-block text-center well">Hello, <strong class="">$fullname!</strong><br/>
+            <a href="$website">$website</a><br/>
+            <a href="https://www.instagram.com/$username" target=blank>
+	      <img class="img-circle img-responsive center-block" src="$picture_url" />
+	    </a>
+	  <p class="">
+		$recent_json[1]['caption']
+	    $# get bio to put in here
+	  </p>
 	  </div>
-          <div="recent col-xs-8"> 
-            <ul class="recent row">
+	  <div class="container">
+          <div="clearfix recent pull-right col-xs-6 center-block"><h4>Recent Photos:</h4>
+            <ul class="recent">
+	    <div class="row">
                 $for i in recent_json[:6]:
-                  <li class="col-xs-3 thumbnail text-center recent">
-		    <a target=blank href=$i['shortcode']>
-		      <img class="img-thumbnail" title='$i['caption']' src=$i['thumbnail_url'] />
+                  <li class="col-xs-2 thumbnail center-block recent">
+		    <a target=blank href="$i['shortcode']">
+		      <img class="img-thumbnail img-responsive center-block" title="$i['caption']" src="$i['thumbnail_url']" />
  		    </a>
-		      <p class="text-center caption"> 
+		      <p class="center-block caption"> 
 		          $if i['user_has_liked']:
 		            <span class="badge"><span class="glyphicon glyphicon-heart"></span> $i['likes']</span>
 		          $else:
 		            <span class="badge"><span class="glyphicon glyphicon-heart-empty"></span> $i['likes']</span>
 		        <span class="badge"><span class="glyphicon glyphicon-comment"></span> $i['comments']</span><br/>
 			  $if i['location'] == None:
-		              <small class="bg-warning text-muted"><span class="glyphicon glyphicon-map-marker"></span> Unknown</small>
+		              <small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> Unknown</small>
 			  $elif i['location']['name'] != None:
-		              <small class="bg-info text-success"><span class="glyphicon glyphicon-map-marker"></span> $i['location']['name']</small>
+		              <small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> $i['location']['name']</small>
 			  $else:
-		              <small class="bg-info text-info"><span class="glyphicon glyphicon-map-marker"></span> $i['location']['longitude'], $i['location']['latitude']</small>
+		              <small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> lat:&nbsp;$i['location']['latitude']<br/>long:&nbsp;$i['location']['longitude']</small>
 		      </p>
 	          </li>
+	    </div>
             </ul>
           </div>
 	</div>
-  <!-- 
+	</div>
+  <!--
   Templetor or python function that puts first three 
   and 2nd thumbnails of last 6 posts into list items
   li's with for loop, then use css to put first three
@@ -60,4 +70,4 @@ $#    </div>
 $#    </div>
 
 
-<a href="/login"><button class="btn btn-lg btn-warning">Try Again</button></a>
+<a class="pull-right" href="/login"><button class="btn btn-lg btn-warning">Try Again</button></a>

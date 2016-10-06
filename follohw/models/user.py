@@ -51,7 +51,7 @@ def get_thumbnails(r):
              "created": r[i]['created_time'],
              "shortcode": r[i]['link'],
              "location": r[i]['location'],
-             "caption": r[i]['caption']['text'],
+             "caption": r[i]['caption'],
              "likes": r[i]['likes']['count'],
              "user_has_liked": r[i]['user_has_liked'],
              "comments": r[i]['comments']['count'],

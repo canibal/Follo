@@ -8,24 +8,24 @@
 }
 
 div.recent {
-  clear:none;
+  
 
 }
 
 ul.recent {
-  list-style: none;
-  font-size: 0px;
-  position:relative;
+  //list-style: none;
+  //font-size: 0px;
+  //position:relative;
   
 }
 
 li.recent {
-  padding: .5em;
+  //padding: .5em;
   display: inline-block;
-  font-size: 16px;
-  font-size: 1rem;
-  vertical-align: top;
-  float:right;
+  //font-size: 16px;
+  //font-size: 1rem;
+  //vertical-align: top;
+  //float:right;
 }
 
 li.recent-even {
@@ -37,6 +37,8 @@ li.recent-odd {
 }
 
 .location {
-  max-width: 50%;
-
+  max-width: 100%;
+  font-size: 8px;
+  white-space: normal; !important
+  
 }
