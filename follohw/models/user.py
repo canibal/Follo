@@ -42,6 +42,17 @@ class User(object):
         parsed = get_thumbnails(response['data'])
         return parsed
 
+    def get_bio(self, user_id, token):
+        c = pycurl.Curl()
+        datum = StringIO()
+        c.setopt(c.URL,
+             'https://api.instagram.com/v1/users/%s/?access_token=%s' % (user_id, token))
+        c.setopt(c.WRITEFUNCTION, datum.write)
+        c.perform()
+        c.close()
+        response = json.loads(datum.getvalue())
+        return response['data']['bio']
+
 def get_thumbnails(r):
     dlist = []
     print r
@@ -60,3 +71,5 @@ def get_thumbnails(r):
             }
         dlist.append(d)
     return dlist
+
+    

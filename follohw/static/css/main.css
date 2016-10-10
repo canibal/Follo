@@ -7,8 +7,8 @@
   line-height: 20px;
 }
 
-div.recent {
-  
+div.self {
+  min-height: 50%;
 
 }
 

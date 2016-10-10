@@ -32,13 +32,15 @@ class Index(object):
             u = user.User()
             user_id = u.set_user_id(username)
             recent_json = u.get_recent(user_id, access_token)
+            bio = u.get_bio(user_id, access_token)
             return render.index(username = username,
                                 fullname = fullname,
                                 user_id = user_id,
                                 picture_url = picture_url,
                                 website = website,
                                 access_token = access_token,
-                                recent_json = recent_json
+                                recent_json = recent_json,
+                                bio = bio
                                )
         except AttributeError:
             return render.login()
