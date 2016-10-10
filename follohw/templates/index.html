@@ -11,22 +11,21 @@ $if access_token:
         </div>
 
         <div class="panel-body row">
-	  <div class="col-xs-4 col-sm-6 self center-block text-center well">Hello, <strong class="">$fullname!</strong><br/>
+	  <div class="col-xs-5 self center-block text-center well">Hello, <strong class="">$fullname!</strong><br/>
             <a href="$website">$website</a><br/>
             <a href="https://www.instagram.com/$username" target=blank>
 	      <img class="img-circle img-responsive center-block" src="$picture_url" />
 	    </a>
-	  <p class="">
-		$bio
-	    $# get bio to put in here
+	  <p class="bio">
+	      $bio
 	  </p>
 	  </div>
 	  <div class="container">
-          <div="clearfix recent pull-right col-xs-4 col-sm-6 center-block"><h4>Recent Photos:</h4>
+          <div class="clearfix recent pull-right col-xs-7 center-block"><h4>Recent Photos:</h4>
             <ul class="recent">
 	    <div class="row">
                 $for i in recent_json[:6]:
-                  <li class="col-xs-4 col-sm-2 thumbnail center-block recent">
+                  <li class="col-xs-4 thumbnail center-block recent">
 		    <a target=blank href="$i['shortcode']">
 		      <img class="img-thumbnail img-responsive center-block" title="$i['caption']" src="$i['thumbnail_url']" />
  		    </a>
@@ -37,11 +36,11 @@ $if access_token:
 		            <span class="badge"><span class="glyphicon glyphicon-heart-empty"></span> $i['likes']</span>
 		        <span class="badge"><span class="glyphicon glyphicon-comment"></span> $i['comments']</span><br/>
 			  $if i['location'] == None:
-		              <p><small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> Unknown</small></p><br/>
+		              <small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> Unknown</small><br/>
 			  $elif i['location']['name'] != None:
-		              <p><small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> $i['location']['name']</small></p>
+		              <small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> $i['location']['name']</small>
 			  $else:
-		              <p><small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> lat:&nbsp;$i['location']['latitude']<br/>long:&nbsp;$i['location']['longitude']</small></p>
+		              <small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> lat:&nbsp;$i['location']['latitude']<br/>long:&nbsp;$i['location']['longitude']</small>
 		      </p>
 	          </li>
 	    </div> <!-- /.row -->
