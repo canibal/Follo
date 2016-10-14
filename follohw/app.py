@@ -33,6 +33,8 @@ class Index(object):
             user_id = u.set_user_id(username)
             recent_json = u.get_recent(user_id, access_token)
             bio = u.get_bio(user_id, access_token)
+            followers = u.get_follow(user_id, 'followed-by', access_token)
+            following = u.get_follow(user_id, 'follows', access_token)
             return render.index(username = username,
                                 fullname = fullname,
                                 user_id = user_id,
@@ -40,7 +42,9 @@ class Index(object):
                                 website = website,
                                 access_token = access_token,
                                 recent_json = recent_json,
-                                bio = bio
+                                bio = bio,
+                                followers = followers,
+                                following = following
                                )
         except AttributeError:
             return render.login()

@@ -1,4 +1,4 @@
-$def with (username, fullname, user_id, picture_url, website, access_token, recent_json, bio)
+$def with (username, fullname, user_id, picture_url, website, access_token, recent_json, bio, followers, following)
 
 
 
@@ -11,30 +11,29 @@ $if access_token:
         </div>
 
         <div class="panel-body row">
-	  <div class="col-xs-5 self center-block text-center well">Hello, <strong class="">$fullname!</strong><br/>
+	  <div class="col-xs-12 col-sm-5 self center-block text-center well">Hello, <strong class="">$fullname!</strong><br/>
             <a href="$website">$website</a><br/>
             <a href="https://www.instagram.com/$username" target=blank>
-	      <img class="img-circle img-responsive center-block" src="$picture_url" />
+	      <img alt="profile picture" class="img-circle img-responsive center-block" src="$picture_url" />
 	    </a>
 	  <p class="bio">
 	      $bio
 	  </p>
 	  </div>
-	  <div class="container">
-          <div class="clearfix recent pull-right col-xs-7 center-block"><h4>Recent Photos:</h4>
+          <div class="clearfix recent col-xs-12 col-sm-7 center-block"><h4><strong>Recent Posts:</strong></h4>
             <ul class="recent">
 	    <div class="row">
                 $for i in recent_json[:6]:
-                  <li class="col-xs-4 thumbnail center-block recent">
+                  <li class="col-xs-6 col-sm-4 thumbnail center-block recent">
 		    <a target=blank href="$i['shortcode']">
-		      <img class="img-thumbnail img-responsive center-block" title="$i['caption']" src="$i['thumbnail_url']" />
+		      <img alt="recent-img-$i" class="img-thumbnail img-responsive center-block" title="i['caption']" src="$i['thumbnail_url']" />
  		    </a>
-		      <p class="center-block caption"> 
+		      <p class="center-block caption"><span class="counts">
 		          $if i['user_has_liked']:
 		            <span class="badge"><span class="glyphicon glyphicon-heart"></span> $i['likes']</span>
 		          $else:
 		            <span class="badge"><span class="glyphicon glyphicon-heart-empty"></span> $i['likes']</span>
-		        <span class="badge"><span class="glyphicon glyphicon-comment"></span> $i['comments']</span><br/>
+		        <span class="badge"><span class="glyphicon glyphicon-comment"></span> $i['comments']</span></span><br/>
 			  $if i['location'] == None:
 		              <small class="location badge"><span class="glyphicon glyphicon-map-marker"></span> Unknown</small><br/>
 			  $elif i['location']['name'] != None:
@@ -46,19 +45,64 @@ $if access_token:
 	    </div> <!-- /.row -->
             </ul>
           </div> <!-- /.recent -->
-	</div> <!-- /.container -->
 	</div> <!-- /.panel-body -->
   <!--
-  Templetor or python function that puts first three 
-  and 2nd thumbnails of last 6 posts into list items
-  li's with for loop, then use css to put first three
-  thumbnails above and second three on bottom with like count
-  in bootstrap badges next to each. Eventually add in 
-  functionality 'like' button, video play control, pop-up 
-  expand w/ stats and comments, 
+  Eventually add in functionality 'like' button, video play
+  control, pop-up expand w/ stats and comments, 
   -->
-
-      </div> <!-- /.panel -->
+    </div> <!-- /.panel -->
+    <div class="col-xs-6 panel panel-success pull-left">
+	<div class="panel-heading">
+	  <h3 class="panel-title">Followers:</h3>
+	  <div class="btn-group btn-group-xs pull-right" role="group" aria-label="">
+	    <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-menu-down"></span></button>
+	    <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-menu-up"></span></button>
+	  </div>
+	</div>
+	<div class="panel-body">
+          <ul class="follow">
+	          $for i in followers:
+	              <li>
+		        <div class="row center-block">
+		          <a class="pull-left col-xs-3" href="">
+				<img class="img-responsive img-thumbnail" alt="follower profile pic $i" src="$i['profile_picture']" /><br/>$i['username']
+			  </a>
+                      $if i['recent'] == 'this user is private':
+                              <div class="">THIS USER IS PRIVATE</div>
+                      $else:
+                          $for j in i['recent'][:6]:
+		              <div class="col-xs-3"><img class="img-responsive img-thumbnail" src="$j['thumbnail_url']" /></div>
+		     </div> <!-- /.row -->
+		     </li>
+          </ul>
+    	</div>
+    </div> <!-- /.follower.panel -->
+    <div class="col-xs-6 panel panel-info pull-right">
+	<div class="panel-heading">
+	  <h3 class="panel-title">Following:</h3>
+	  <div class="btn-group btn-group-xs pull-right" role="group" aria-label="">
+	    <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-menu-down"></span></button>
+	    <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-menu-up"></span></button>
+	  </div>
+	</div>
+	<div class="panel-body">
+          <ul class="follow">
+              $for i in following:
+	          <li>
+		    <div class="row">
+		      <a class="pull-left col-xs-3" href="/">
+		        <img class="img-responsive img-thumbnail" alt="following profile pic $i" src="$i['profile_picture']" /><br/>$i['username']
+		      </a>
+                  $if i['recent'] == 'this user is private':
+                      <div class="">THIS USER IS PRIVATE</div>
+                  $else:
+                      $for j in i['recent'][:6]:
+		          <div class="col-xs-3"><img class="img-responsive img-thumbnail" src="$j['thumbnail_url']" /></div>
+		 </div>
+		</li>
+          </ul>
+        </div> <!-- /.following.panel.body -->
+      </div> <!-- /.following.panel -->
     </div> <!-- /.well -->
 $#else:
 $#    <div class="well well-sm">
@@ -68,5 +112,5 @@ $#        <div class="panel-body"><em>Hello, Nobody!</em></div>
 $#    </div>
 $#    </div>
 
-
-<a class="pull-right" href="/login"><button class="btn btn-lg btn-warning">Try Again</button></a>
+	$access_token
+<a class="clearfix pull-right" href="/login"><button class="btn btn-lg btn-warning">Try Again</button></a>

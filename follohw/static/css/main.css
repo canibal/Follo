@@ -28,12 +28,10 @@ li.recent {
   //float:right;
 }
 
-li.recent-even {
-  
-}
+.counts {
+  white-space: nowrap;
+  max-width: 100%;
 
-li.recent-odd { 
- 
 }
 
 .location {
@@ -43,4 +41,7 @@ li.recent-odd {
   
 }
 
+.follow > li {
+  display: inline-block;
 
+}

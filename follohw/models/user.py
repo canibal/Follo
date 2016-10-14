@@ -28,34 +28,36 @@ class User(object):
     def get_recent(self, user_id, token):
         #count=None, min_id=None, max_id=None figure
         # out what defaults are
-        # (indent correctly) > if token = self.access_token
-        c = pycurl.Curl()
-        datum = StringIO()
-        #c.setopt(c.VERBOSE, True)
-        c.setopt(c.URL,
-        'https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s' % (user_id, token))
-        c.setopt(c.WRITEFUNCTION, datum.write)
-        c.perform()
-        c.close()
-        response = json.loads(datum.getvalue())
+        # (indent correctly) > if token = self.access_tokena
+        print user_id
+        response = curl_get('https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s' % (user_id, token))
         parsed = {}
-        parsed = get_thumbnails(response['data'])
+        try:
+            parsed = get_thumbnails(response['data'])
+        except KeyError:
+            parsed = "this user is private"
         return parsed
 
     def get_bio(self, user_id, token):
-        c = pycurl.Curl()
-        datum = StringIO()
-        c.setopt(c.URL,
-             'https://api.instagram.com/v1/users/%s/?access_token=%s' % (user_id, token))
-        c.setopt(c.WRITEFUNCTION, datum.write)
-        c.perform()
-        c.close()
-        response = json.loads(datum.getvalue())
+        response = curl_get('https://api.instagram.com/v1/users/%s/?access_token=%s' % (user_id, token))
         return response['data']['bio']
+
+    def get_follow(self, user_id, which, token):
+        response = curl_get('https://api.instagram.com/v1/users/%s/%s?access_token=%s' % (user_id, which, token))
+        response = response['data']
+        for i in response:
+            u_id = i['id']
+            print u_id
+            x = self.get_recent(u_id, token)
+            i["recent"] = x
+        print response
+        # create list out of response (sort)
+        # use user_ids through for loop to call set_user_id & get_recent
+        # functions above and append to list item
+        return response
 
 def get_thumbnails(r):
     dlist = []
-    print r
     for i in range(len(r)):
         d = {"media_id": r[i]['id'],
              "thumbnail_url": r[i]['images']['thumbnail']['url'],
@@ -72,4 +74,11 @@ def get_thumbnails(r):
         dlist.append(d)
     return dlist
 
-    
+def curl_get(url):
+    c = pycurl.Curl()
+    datum = StringIO()
+    c.setopt(c.URL, url)
+    c.setopt(c.WRITEFUNCTION, datum.write)
+    c.perform()
+    c.close()
+    return json.loads(datum.getvalue())
