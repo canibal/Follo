@@ -41,7 +41,7 @@ li.recent {
   
 }
 
-.follow > li {
-  display: inline-block;
+li.follow {
+  list-style: none;
 
 }

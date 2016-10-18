@@ -29,7 +29,7 @@ class User(object):
         #count=None, min_id=None, max_id=None figure
         # out what defaults are
         # (indent correctly) > if token = self.access_tokena
-        print user_id
+        # print user_id
         response = curl_get('https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s' % (user_id, token))
         parsed = {}
         try:
@@ -47,10 +47,10 @@ class User(object):
         response = response['data']
         for i in response:
             u_id = i['id']
-            print u_id
+            # print u_id
             x = self.get_recent(u_id, token)
             i["recent"] = x
-        print response
+        # print response
         # create list out of response (sort)
         # use user_ids through for loop to call set_user_id & get_recent
         # functions above and append to list item
